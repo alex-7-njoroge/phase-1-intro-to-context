@@ -70,3 +70,27 @@ function createEmployeeRecord([fName, lName, title, rate]) {
       return (total += allWagesFor(employee));
     }, 0);
   }
+  const allWagesFor = function () {
+    const eligibleDates = this.timeInEvents.map(function (e) {
+        return e.date
+    })
+
+    const payable = eligibleDates.reduce(function (memo, d) {
+        return memo + wagesEarnedOnDate.call(this, d)
+    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
+
+    return payable
+}
+
+      return e.date;
+    });
+
+    const payable = eligibleDates.reduce(
+      function (memo, d) {
+        return memo + wagesEarnedOnDate.call(this, d);
+      }.bind(this),
+      0
+    ); // <== Hm, why did we need to add bind() there? We'll discuss soon!
+
+    return payable;
+  };
